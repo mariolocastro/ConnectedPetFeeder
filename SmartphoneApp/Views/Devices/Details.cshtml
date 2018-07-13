@@ -1,0 +1,46 @@
+﻿@model SmartphoneApp.Models.DeviceListDto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Foto</h2>
+
+<div>
+    <h4>ListPhoto</h4>
+    <dl class=" dl-horizontal">
+        <dt>
+            @Html.DisplayTextFor(model => model.DeviceId)
+            <a href="#" id="Capture" class="btn btn-primary">Fai foto</a>
+        </dt>
+    </dl>
+</div>
+<br />
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</div>
+@section Scripts
+    {
+    <script type="text/javascript">
+    $("#Capture").click(function (e) {
+
+
+                var url = '@Url.Action("Capture", new { id = Model.DeviceId })';
+                var id = '@Model.DeviceId';
+                $.ajax({
+                url: url,
+                type: 'post',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                data: JSON.stringify({
+                id: id
+                })
+
+                });
+
+    });
+    </script>
+}
